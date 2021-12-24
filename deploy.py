@@ -11,6 +11,7 @@ st.set_page_config(layout="wide")
 
 
 DEFAULT_DATA_BASE_DIR='./'
+TEAM_DIR ='team/'
 # model=load_model(r'assets/custom_4370_32_100_v2.h5')
 
 
@@ -29,8 +30,8 @@ st.sidebar.title("Explore the Following")
 
 # --------------------------- Functions ----------------------------------
 
-# def read_markdown_file(markdown_file):
-#     return Path(markdown_file).read_text()
+def read_markdown_file(markdown_file):
+    return Path(markdown_file).read_text()
 
 
 
@@ -59,8 +60,8 @@ if app_mode == SIDEBAR_OPTION_HEATMAP:
 
 elif app_mode == SIDEBAR_OPTION_PROJECT_INFO:
     st.sidebar.success("Project information showing on the right!")
-    # intro_markdown = read_markdown_file(os.path.join(DEFAULT_DATA_BASE_DIR,"README.md"))
-    # st.markdown(intro_markdown, unsafe_allow_html=True)
+    intro_markdown = read_markdown_file(os.path.join(DEFAULT_DATA_BASE_DIR,"README.md"))
+    st.markdown(intro_markdown, unsafe_allow_html=True)
 
     
 
@@ -72,23 +73,23 @@ elif app_mode == SIDEBAR_OPTION_PROJECT_INFO:
     
 elif app_mode == SIDEBAR_OPTION_MEET_TEAM:
     st.sidebar.write(" ------ ")
-    st.markdown("<h1 style='text-align: center; color: white;'>Team MASKD!</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: white;'>Meet the Team</h1>", unsafe_allow_html=True)
     st.write("------")
     st.sidebar.write('Please feel free to connect with us on Linkedin!')
     st.sidebar.success('Hope you had a great time :)')
-    col1,col2,col3 = st.beta_columns([2,2,2])
-    # with col1:
-	#     st.image(os.path.join(DEFAULT_DATA_BASE_DIR,TEAM_DIR,'kv.jpeg'),caption="Karanveer Sidana",use_column_width=True)
-    # with col2:
-    #     st.image(os.path.join(DEFAULT_DATA_BASE_DIR,TEAM_DIR,'h2.jpeg'),caption="Hiten Goyal",use_column_width=True)
-    # with col3:
-	#     st.image(os.path.join(DEFAULT_DATA_BASE_DIR,TEAM_DIR,'channa.png'),caption="Charanjeet Singh",use_column_width=True)
+    col1,col2,col3 = st.columns([2,2,2])
+    with col1:
+	    st.image(os.path.join(DEFAULT_DATA_BASE_DIR,TEAM_DIR,'kv.jpeg'),caption="Karanveer Sidana",use_column_width=True)
+    with col2:
+        st.image(os.path.join(DEFAULT_DATA_BASE_DIR,TEAM_DIR,'hiten.jpeg'),caption="Hiten Goyal",use_column_width=True)
+    with col3:
+	    st.image(os.path.join(DEFAULT_DATA_BASE_DIR,TEAM_DIR,'jatin.png '),caption="Jatin Kansal",use_column_width=True)
 
-    expandar_linkedin = st.beta_expander('Contact Information')
+    expandar_linkedin = st.expander('Contact Information')
     expandar_linkedin.write(
         'Karan: https://www.linkedin.com/in/karanveer-sidana-07a49b1b1/')
     expandar_linkedin.write('Hiten: https://www.linkedin.com/in/hitengoyal/')
-    expander_faq = st.beta_expander("More About Our Project")
+    expander_faq = st.expander("More About Our Project")
     expander_faq.write("Hi there! If you have any questions about our project, or simply want to check out the source code, please visit our github repo: https://github.com/KingK619/Facemask-Detection")
 
 else:
