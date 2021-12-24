@@ -3,6 +3,8 @@ from pprint import pprint
 print('1. Weather by City')
 print('2. Weather by Coordinates')
 
+
+
 choice= int(input('Enter your choice: '))
 if(choice == 1):
     city = input('Enter your city : ')

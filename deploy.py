@@ -5,7 +5,7 @@ import pandas as pd
 import streamlit as st
 from pathlib import Path
 import matplotlib.pyplot as plt
-import leafmap.leafmap as leafmap
+import leafmap.foliumap as leafmap
 st.set_page_config(layout="wide")
 
 
@@ -46,10 +46,11 @@ app_mode = st.sidebar.selectbox(
 if app_mode == SIDEBAR_OPTION_HEATMAP:
     st.title('Heatmaps')
 
-    filepath = "https://raw.githubusercontent.com/giswqs/leafmap/master/examples/data/us_cities.csv"
-    m = leafmap.Map()
-    m.add_basemap("Stamen.Toner")
-    m.add_heatmap(filepath, latitude="latitude", longitude='longitude', value="pop_max", name="Heat map", radius=20)
+    # filepath = "https://raw.githubusercontent.com/giswqs/leafmap/master/examples/data/us_cities.csv"
+    filepath="./predictions.csv"
+    m = leafmap.Map(tiles="stamentoner")
+    # m.add_basemap("Stamen.Toner")
+    m.add_heatmap(filepath, latitude="latitude", longitude='longitude', value="prediction", name="Heat map", radius=20)
     m.to_streamlit(width=700, height=500)
 
     
