@@ -1,9 +1,11 @@
 import imghdr
 import os
 import numpy as np 
+import pandas as pd
 import streamlit as st
 from pathlib import Path
 import matplotlib.pyplot as plt
+import leafmap.leafmap as leafmap
 st.set_page_config(layout="wide")
 
 
@@ -13,11 +15,11 @@ DEFAULT_DATA_BASE_DIR='./'
 
 
 # -------------------------- SIDE BAR --------------------------------
-SIDEBAR_OPTION_WEBCAM = "Webcam Capture"
+SIDEBAR_OPTION_HEATMAP = "Heatmap"
 SIDEBAR_OPTION_PROJECT_INFO = "Show Project Info"
 SIDEBAR_OPTION_MEET_TEAM = "Meet the Team"
 
-SIDEBAR_OPTIONS = [SIDEBAR_OPTION_PROJECT_INFO,SIDEBAR_OPTION_WEBCAM,
+SIDEBAR_OPTIONS = [SIDEBAR_OPTION_PROJECT_INFO,SIDEBAR_OPTION_HEATMAP,
                    SIDEBAR_OPTION_MEET_TEAM]
 
 # st.sidebar.image("assets/facemasklogo1.png")
@@ -41,9 +43,16 @@ app_mode = st.sidebar.selectbox(
 
 
 
-if app_mode == SIDEBAR_OPTION_WEBCAM:
-    st.text('In Develpment')
+if app_mode == SIDEBAR_OPTION_HEATMAP:
+    st.title('Heatmaps')
 
+    filepath = "https://raw.githubusercontent.com/giswqs/leafmap/master/examples/data/us_cities.csv"
+    m = leafmap.Map()
+    m.add_basemap("Stamen.Toner")
+    m.add_heatmap(filepath, latitude="latitude", longitude='longitude', value="pop_max", name="Heat map", radius=20)
+    m.to_streamlit(width=700, height=500)
+
+    
 
 
 
