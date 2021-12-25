@@ -8,6 +8,8 @@ import matplotlib.pyplot as plt
 import leafmap.foliumap as leafmap
 st.set_page_config(layout="wide")
 
+#data collection from api and storing it into the csv
+import data_collection                  
 
 
 DEFAULT_DATA_BASE_DIR='./'
@@ -53,6 +55,8 @@ if app_mode == SIDEBAR_OPTION_HEATMAP:
     # m.add_basemap("Stamen.Toner")
     m.add_heatmap(filepath, latitude="latitude", longitude='longitude', value="prediction", name="Heat map", radius=20)
     m.to_streamlit(width=700, height=500)
+    tempGraph='<iframe src="https://www.datahub.io/core/global-temp/view/0" width="100%" height="475px" frameborder="0"></iframe>'
+    st.markdown(tempGraph,unsafe_allow_html=True)
 
     
 
@@ -62,6 +66,8 @@ elif app_mode == SIDEBAR_OPTION_PROJECT_INFO:
     st.sidebar.success("Project information showing on the right!")
     intro_markdown = read_markdown_file(os.path.join(DEFAULT_DATA_BASE_DIR,"README.md"))
     st.markdown(intro_markdown, unsafe_allow_html=True)
+
+
 
     
 
@@ -84,7 +90,7 @@ elif app_mode == SIDEBAR_OPTION_MEET_TEAM:
         st.image(os.path.join(DEFAULT_DATA_BASE_DIR,TEAM_DIR,'hiten.jpeg'),caption="Hiten Goyal",use_column_width=True)
     with col3:
 	    st.image(os.path.join(DEFAULT_DATA_BASE_DIR,TEAM_DIR,'jatin.png '),caption="Jatin Kansal",use_column_width=True)
-
+        
     expandar_linkedin = st.expander('Contact Information')
     expandar_linkedin.write(
         'Karan: https://www.linkedin.com/in/karanveer-sidana-07a49b1b1/')
