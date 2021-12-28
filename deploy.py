@@ -9,7 +9,7 @@ import leafmap.foliumap as leafmap
 st.set_page_config(layout="wide")
 
 #data collection from api and storing it into the csv
-import data_collection                  
+# import data_collection                  
 
 
 DEFAULT_DATA_BASE_DIR='./'
@@ -48,15 +48,27 @@ app_mode = st.sidebar.selectbox(
 
 if app_mode == SIDEBAR_OPTION_HEATMAP:
     st.title('Heatmaps')
-
-    # filepath = "https://raw.githubusercontent.com/giswqs/leafmap/master/examples/data/us_cities.csv"
     filepath="./predictions.csv"
-    m = leafmap.Map(tiles="stamentoner")
-    # m.add_basemap("Stamen.Toner")
-    m.add_heatmap(filepath, latitude="latitude", longitude='longitude', value="prediction", name="Heat map", radius=20)
-    m.to_streamlit(width=700, height=500)
-    tempGraph='<iframe src="https://www.datahub.io/core/global-temp/view/0" width="100%" height="475px" frameborder="0"></iframe>'
-    st.markdown(tempGraph,unsafe_allow_html=True)
+    col1,col2,col3 = st.columns([4,4,4])
+    with col1:
+        st.write("Australia")    
+        m = leafmap.Map(center=[-30.67622,142.74998],zoom=3,tiles="stamentoner")
+        m.add_heatmap(filepath, latitude="latitude", longitude='longitude', value="prediction", name="Heat map", radius=20)
+        m.to_streamlit(width=350, height=350)
+    with col2:
+        st.write("USA")
+        m = leafmap.Map(center=[36.2094194,-103.7299561],zoom=2.5,tiles="stamentoner")
+        m.add_heatmap(filepath, latitude="latitude", longitude='longitude', value="prediction", name="Heat map", radius=20)
+        m.to_streamlit(width=350, height=350)        
+    with col3:
+        st.write("Brazil")
+        m = leafmap.Map(center=[-7.503517,-65.260445],zoom=2.5,tiles="stamentoner")
+        m.add_heatmap(filepath, latitude="latitude", longitude='longitude', value="prediction", name="Heat map", radius=20)
+        m.to_streamlit(width=350, height=350)
+    st.write("")
+    worldmap = '<iframe src="https://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat=-30.67622&lon=142.749989&zoom=0" width="100%" height="475px" frameborder="0" scroll="no"></iframe>'
+    st.markdown(worldmap,unsafe_allow_html=True)
+
 
     
 

@@ -14,7 +14,7 @@ Wildfires emit carbon dioxide and other greenhouse gases that will continue to w
 
 ## Global Affiliated Regional Weather Networks
 
-<iframe src="https://www.eldoradoweather.com/wd-alt/global-map.php" width="100%" height="975px" frameborder="0"></iframe>
+<iframe src="https://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat=30.2229&lon=74.9342&zoom=5" width="100%" height="975px" frameborder="0"></iframe>
 
 <!-- <div style="overflow: hidden; margin-top: 40px; margin-left:0;">
 <iframe src="https://www.eldoradoweather.com/current/currentustemps.html" padding-top="20px" width="100%" height="675px" frameborder="0" scrolling="no"></iframe>
