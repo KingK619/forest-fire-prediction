@@ -1,6 +1,7 @@
 import imghdr
-import os
+import os, csv
 import numpy as np 
+
 import pandas as pd
 import streamlit as st
 from pathlib import Path
@@ -68,8 +69,15 @@ if app_mode == SIDEBAR_OPTION_HEATMAP:
     st.write("")
     worldmap = '<iframe src="https://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat=-30.67622&lon=142.749989&zoom=0" width="100%" height="475px" frameborder="0" scroll="no"></iframe>'
     st.markdown(worldmap,unsafe_allow_html=True)
+    filename = []
+    with open('graphData.csv', 'r') as f:
+        predictionData=[int(line['prediction']) for line in  csv.DictReader(f)]
 
-
+    a = np.array(predictionData).reshape(4,7)
+    a = np.transpose(a)
+    a = pd.DataFrame(a,columns=['Amazon Forest','Adelaide Hills','Angeles National Forest','Hunter Region'])
+    st.subheader(' 7-Day Predictions for Major Forests ')
+    st.line_chart(a)
     
 
 

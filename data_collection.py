@@ -56,7 +56,7 @@ futurePredicList=[]
 cooridnates=[(-3.4653052,-62.2246353, 'Amazon Forest'),(-34.91119 , 138.70735 , 'Adelaide Hills' ),(34.3168052,-118.0079471, 'Angeles National Forest'),(-32.193218, 151.700562,'Hunter Region')]
 for lat, lon,name in cooridnates:
     # url='http://api.openweathermap.org/data/2.5/forecast/daily?lat={}&lon={}&cnt=4&appid=09d6ff7d84e1ad00519ed579350511e1&units=metric'.format(lat,lon)
-    url='https://api.openweathermap.org/data/2.5/forecast/daily?lat={}&lon={}&cnt=4&appid=3bcfcde9b7438aa7696f020ed75f5673&units=metric'.format(lat,lon)
+    url='https://api.openweathermap.org/data/2.5/forecast/daily?lat={}&lon={}&cnt=7&appid=3bcfcde9b7438aa7696f020ed75f5673&units=metric'.format(lat,lon)
     # print(url)
     res = requests.get(url)
     data = res.json()
