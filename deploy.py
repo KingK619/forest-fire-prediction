@@ -1,11 +1,8 @@
-import imghdr
 import os, csv
-import numpy as np 
-
+import numpy as np  
 import pandas as pd
 import streamlit as st
 from pathlib import Path
-import matplotlib.pyplot as plt
 import leafmap.foliumap as leafmap
 st.set_page_config(layout="wide")
 
@@ -49,7 +46,7 @@ app_mode = st.sidebar.selectbox(
 
 if app_mode == SIDEBAR_OPTION_HEATMAP:
     st.title('Heatmaps')
-    filepath="./predictions.csv"
+    filepath="./data/csv/predictions.csv"
     col1,col2,col3 = st.columns([4,4,4])
     with col1:
         st.write("Australia")    
@@ -70,14 +67,22 @@ if app_mode == SIDEBAR_OPTION_HEATMAP:
     worldmap = '<iframe src="https://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat=-30.67622&lon=142.749989&zoom=0" width="100%" height="475px" frameborder="0" scroll="no"></iframe>'
     st.markdown(worldmap,unsafe_allow_html=True)
     filename = []
-    with open('graphData.csv', 'r') as f:
+    with open('./data/csv/graphData.csv', 'r') as f:
         predictionData=[int(line['prediction']) for line in  csv.DictReader(f)]
-
+    with open('./data/csv/graphData.csv', 'r') as f:
+        date=[line['date'] for line in  csv.DictReader(f)]
+        date=date[7:14]
     a = np.array(predictionData).reshape(4,7)
     a = np.transpose(a)
     a = pd.DataFrame(a,columns=['Amazon Forest','Adelaide Hills','Angeles National Forest','Hunter Region'])
+    a['date']=date
+    a.set_index(['date'], inplace = True)
     st.subheader(' 7-Day Predictions for Major Forests ')
+    # st.dataframe(a)
     st.line_chart(a)
+
+
+
     
 
 
@@ -113,10 +118,11 @@ elif app_mode == SIDEBAR_OPTION_MEET_TEAM:
         
     expandar_linkedin = st.expander('Contact Information')
     expandar_linkedin.write(
-        'Karan: https://www.linkedin.com/in/karanveer-sidana-07a49b1b1/')
+        'Karan: https://in.linkedin.com/in/karanveersidana')
     expandar_linkedin.write('Hiten: https://www.linkedin.com/in/hitengoyal/')
+    expandar_linkedin.write('Jatin: https://in.linkedin.com/in/jatinkansal1210')
     expander_faq = st.expander("More About Our Project")
-    expander_faq.write("Hi there! If you have any questions about our project, or simply want to check out the source code, please visit our github repo: https://github.com/KingK619/Facemask-Detection")
+    expander_faq.write("Hi there! If you have any questions about our project, or simply want to check out the source code, please visit our github repo: https://github.com/KingK619/forest-fire-prediction")
 
 else:
 	raise ValueError(
